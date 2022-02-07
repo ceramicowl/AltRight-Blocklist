@@ -4,8 +4,6 @@ import json
 input_file = open('groups.txt', 'r')  # This file generated with data from the SLPC
 output_file = open('results.txt', 'w')
 
-output_file.write("Organization,URL\n")
-
 line = input_file.readline()
 while line != "":
     url = 'https://autocomplete.clearbit.com/v1/companies/suggest?query=' + line
