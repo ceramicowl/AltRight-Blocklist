@@ -5,4 +5,4 @@ A list of known hate groups was pulled from https://www.splcenter.org/hate-map b
 
 A simple Python script runs groups.txt through the public ClearBit API, which performs a web search and returns organization info in JSON format. If a result is returned, the first web address result is passed into results.txt. In theory, this file can then be added directly into the PiHole Adlists.
 
-Additionally, individually discovered domains are added to ManualAdditions.txt manually. This list is, by nature, overwhelmingly incomplete. However, it can provide a more convenient central list than individual blacklist entries.
+Additionally, individually discovered domains are added to ManualAdditions.txt manually. This list is, by nature, overwhelmingly incomplete. However, it can provide a more convenient central list than individual blacklist entries. Cuurently the vast majority of entries were sourced via Wikipedia's list of known hate websites.
