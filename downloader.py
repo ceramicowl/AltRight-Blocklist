@@ -1,9 +1,15 @@
 import requests
 import csv
+from datetime import date
 
-url = 'https://www.splcenter.org/hate-map/csv/2020'
+url_base = 'https://www.splcenter.org/hate-map/csv/'
 
-response = requests.get(url)
-obj = csv.reader(response.text.splitlines())
-for row in obj:
-    print(row[0])
+this_year = date.today().year
+for year in range(this_year, 2000, -1):
+    url = url_base+str(year)
+    response = requests.get(url)
+    if not response.links: break  # If response has links, it's not a valid year
+
+encoded_csv = csv.reader(response.text.splitlines())
+names = [row[0] for row in encoded_csv]
+print(names)
