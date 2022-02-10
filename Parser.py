@@ -6,10 +6,9 @@ import requests
 import csv
 from datetime import date
 
-names = []
-this_year = date.today().year
 print('Downloading data for each year...')
-for year in range(this_year, 1999, -1):
+names = []
+for year in range(date.today().year, 1999, -1):
     url = 'https://www.splcenter.org/hate-map/csv/'+str(year)
     response = requests.get(url)
     if response.headers['content-type'].split(';')[0] == 'text/csv':
@@ -23,12 +22,14 @@ for year in range(this_year, 1999, -1):
             name = row[0]
             if not name in names:
                 names.append(name)
+    else:
+        print('No data for '+str(year))
 print('All data downloaded!')
 
 print('Finding associated websites for each group...')
 with open('results.txt', 'w') as output_file:
     for name in names:
-        append = urllib.parse.quote(name, safe='')  # Encodes line for url
+        append = urllib.parse.quote(name, safe='')  # Encodes name for url
         url = 'https://autocomplete.clearbit.com/v1/companies/suggest?query=' + append
         with urllib.request.urlopen(url) as response:
             html = json.loads(response.read())  # The URL request returns data in JSON format, which is read here
